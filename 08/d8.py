@@ -19,8 +19,10 @@ class main():
         return(array)
 
     def print_array(self):
+        print('-----------------------------------')
         for line in self.array:
             print(line)
+        print('-----------------------------------')
 
     def find_uncovered(self, print_map=False):
         size = len(self.array)
@@ -31,52 +33,41 @@ class main():
                 element = int(self.array[x][y])
                 element_column = [int(i[y] )for i in self.array]
                 element_row = [int(i) for i in self.array[x]]
-                print('-----------------')
-                print(f'Col: {element_column}')
-                print(f'Row: {element_row}')
 
                 if x == 0:
-                    print(f'Element {element} ({x}, {y}) pass cond 1 - outer edge')
                     uncovered_array[x][y] = 'O'
                     count += 1
                     continue
                 elif y == 0:
-                    print(f'Element {element} ({x}, {y}) pass cond 2 - outer edge')
                     uncovered_array[x][y] = 'O'
                     count += 1
                     continue
                 elif x == size-1:
-                    print(f'Element {element} ({x}, {y}) pass cond 3 - outer edge')
                     uncovered_array[x][y] = 'O'
                     count += 1
                     continue
                 elif y == size-1:
-                    print(f'Element {element} ({x}, {y}) pass cond 4 - outer edge')
                     uncovered_array[x][y] = 'O'
                     count += 1
                     continue
-
                 elif element > max(element_row[:y]) or element > max(element_row[y+1:]):
-                    print(f'Element {element} ({x}, {y}) pass cond 5')
                     uncovered_array[x][y] = 'O'
                     count += 1
                     continue
                 elif element > max(element_column[:x]) or element > max(element_column[x+1:]):
-                    print(f'Element {element} ({x}, {y}) pass cond 6')
                     uncovered_array[x][y] = 'O'
                     count += 1
                     continue
                 else:
-                    print(f'Element {element} ({x}, {y}) is not visible!')
                     continue
         if print_map:
             for x in uncovered_array:
                 print(x)
-        return count
+        print(f'Numer of visible trees: {count}')
 
 if __name__ == "__main__":
-    main(test=True).print_array()
+    main(test=False).print_array()
     print()
-    main(test=True).find_uncovered()
+    main(test=False).find_uncovered()
 
 
